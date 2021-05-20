@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -25,8 +26,7 @@ public class Main {
         System.out.print(total);
     }
 
-    public static void N10809()
-    {
+    public static void N10809() {
         /* 알파벳 찾기
         알파벳 소문자로만 이루어진 단어 S가 주어진다. 각각의 알파벳에 대해서,
         단어에 포함되어 있는 경우에는 처음 등장하는 위치를, 포함되어 있지 않은 경우에는
@@ -37,6 +37,25 @@ public class Main {
         단어의 첫 번째 글자는 0번째 위치이고, 두 번째 글자는 1번째 위치이다.
          */
 
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
 
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < input.length(); i++)
+        {
+            int key = input.charAt(i);
+            if (map.containsKey(key) == false)
+            {
+                map.put(key, i);
+            }
+        }
+
+        for (int i = 'a'; i < 'z'; i++)
+        {
+            if (map.containsKey(i))
+                System.out.printf("%d ", map.get(i));
+            else
+                System.out.printf("%d ", -1);
+        }
     }
 }
