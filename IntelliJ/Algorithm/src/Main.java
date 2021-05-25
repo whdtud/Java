@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args)
     {
-        N1157();
+        N2562();
     }
 
     public static void N11720() {
@@ -37,7 +37,6 @@ public class Main {
         ...z가 처음 등장하는 위치를 공백으로 구분해서 출력한다. 만약 어떤 알파벳이 단어에 포함되어 있지 않다면 -1을 출력한다.
         단어의 첫 번째 글자는 0번째 위치이고, 두 번째 글자는 1번째 위치이다.
          */
-
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
 
@@ -58,6 +57,38 @@ public class Main {
             else
                 System.out.printf("%d ", -1);
         }
+    }
+
+    public static void N2562() {
+        /* 최댓값
+        9개의 서로 다른 자연수가 주어질 때, 이들 중 최댓값을 찾고
+        그 최댓값이 몇 번째 수인지를 구하는 프로그램을 작성하시오.
+        예를 들어, 서로 다른 9개의 자연수
+        3, 29, 38, 12, 57, 74, 40, 85, 61
+        이 주어지면, 이들 중 최댓값은 85이고, 이 값은 8번째 수이다.
+        입력) 첫째 줄부터 아홉 번째 줄까지 한 줄에 하나의 자연수가 주어진다.
+        주어지는 자연수는 100 보다 작다.
+        출력) 첫째 줄에 최댓값을 출력하고, 둘째 줄에 최댓값이 몇 번째 수인지를 출력한다.
+         */
+
+        Scanner sc = new Scanner(System.in);
+
+        int[] array = new int[9];
+        for (int i = 0; i < 9; i++) {
+            array[i] = sc.nextInt();
+        }
+
+        int max = -1;
+        int position = -1;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+                position = i + 1;
+            }
+        }
+
+        System.out.println(max);
+        System.out.println(position);
     }
 
     public static void N1157()
