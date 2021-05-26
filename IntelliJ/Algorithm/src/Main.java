@@ -4,9 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args)
-    {
-        N2562();
+    public static void main(String[] args) {
+        Daum();
     }
 
     public static void N11720() {
@@ -41,17 +40,14 @@ public class Main {
         String input = sc.next();
 
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = 0; i < input.length(); i++)
-        {
+        for (int i = 0; i < input.length(); i++) {
             int key = input.charAt(i);
-            if (map.containsKey(key) == false)
-            {
+            if (map.containsKey(key) == false) {
                 map.put(key, i);
             }
         }
 
-        for (int i = 'a'; i < 'z'; i++)
-        {
+        for (int i = 'a'; i < 'z'; i++) {
             if (map.containsKey(i))
                 System.out.printf("%d ", map.get(i));
             else
@@ -91,8 +87,7 @@ public class Main {
         System.out.println(position);
     }
 
-    public static void N1157()
-    {
+    public static void N1157() {
         /* 단어 공부
          * 알파벳 대소문자로 된 단어가 주어지면, 이 단어에서 가장 많이 사용된
          * 알파벳이 무엇인지 알아내는 프로그램을 작성하시오. 단, 대문자와 소문자를 구분하지 않는다.
@@ -117,7 +112,7 @@ public class Main {
         int highestValue = -1;
         char highestChar = '0';
         for (Map.Entry<Character, Integer> entry :
-                map.entrySet()){
+                map.entrySet()) {
             int value = entry.getValue();
             if (value > highestValue) {
                 highestValue = value;
@@ -151,5 +146,55 @@ public class Main {
         System.out.print(words.length);
 
         sc.close();
+    }
+
+    public static void N3052() {
+        /* 나머지
+        두 자연수 A와 B가 있을 때, A%B는 A를 B로 나눈 나머지 이다. 예를 들어, 7, 14, 27, 38을 3으로 나눈 나머지는 1, 2, 0, 2이다.
+        수 10개를 입력받은 뒤, 이를 42로 나눈 나머지를 구한다. 그 다음 서로 다른 값이 몇 개 있는지 출력하는 프로그램을 작성하시오.
+        입력) 첫째 줄부터 열번째 줄 까지 숫자가 한 줄에 하나씩 주어진다. 이 숫자는 1,000보다 작거나 같고, 음이 아닌 정수이다.
+        출력) 첫째 줄에, 42로 나누었을 때, 서로 다른 나머지가 몇 개 있는지 출력한다.
+         */
+
+        Scanner sc = new Scanner(System.in);
+        int[] array = new int[42];
+
+        for (int i = 0; i < 10; i++) {
+            int index = sc.nextInt() % 42;
+            array[index]++;
+        }
+
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > 0) {
+                count++;
+            }
+        }
+
+        System.out.print(count);
+
+        sc.close();
+    }
+
+    public static void Daum() {
+        /*
+        1차원의 점들이 주어졌을 때 그 중 가장 거리가 짧은 것의 쌍을 출력하는 함수를 작성하시오.
+        (단 점들의 배열은 모두 정렬되어있다고 가정한다.)
+        예를들어 S={1, 3, 4, 8, 13, 17, 20} 이 주어졌다면, 결과값은 (3, 4)가 될 것이다.
+         */
+
+        int[] array = new int[] {1, 3, 4, 8, 13, 17, 20};
+
+        int index = -1;
+        int nearestDist = array.length;
+        for (int i = 0; i < array.length - 1; i++) {
+            int dist = array[i + 1] - array[i];
+            if (dist < nearestDist) {
+                nearestDist = dist;
+                index = i;
+            }
+        }
+
+        System.out.printf("(%d, %d)", array[index], array[index + 1]);
     }
 }
