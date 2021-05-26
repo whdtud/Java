@@ -4,9 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args)
-    {
-        N1157();
+    public static void main(String[] args) {
+        N5662();
     }
 
     public static void N11720() {
@@ -37,22 +36,18 @@ public class Main {
         ...z가 처음 등장하는 위치를 공백으로 구분해서 출력한다. 만약 어떤 알파벳이 단어에 포함되어 있지 않다면 -1을 출력한다.
         단어의 첫 번째 글자는 0번째 위치이고, 두 번째 글자는 1번째 위치이다.
          */
-
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
 
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for (int i = 0; i < input.length(); i++)
-        {
+        for (int i = 0; i < input.length(); i++) {
             int key = input.charAt(i);
-            if (map.containsKey(key) == false)
-            {
+            if (map.containsKey(key) == false) {
                 map.put(key, i);
             }
         }
 
-        for (int i = 'a'; i < 'z'; i++)
-        {
+        for (int i = 'a'; i < 'z'; i++) {
             if (map.containsKey(i))
                 System.out.printf("%d ", map.get(i));
             else
@@ -60,8 +55,39 @@ public class Main {
         }
     }
 
-    public static void N1157()
-    {
+    public static void N2562() {
+        /* 최댓값
+        9개의 서로 다른 자연수가 주어질 때, 이들 중 최댓값을 찾고
+        그 최댓값이 몇 번째 수인지를 구하는 프로그램을 작성하시오.
+        예를 들어, 서로 다른 9개의 자연수
+        3, 29, 38, 12, 57, 74, 40, 85, 61
+        이 주어지면, 이들 중 최댓값은 85이고, 이 값은 8번째 수이다.
+        입력) 첫째 줄부터 아홉 번째 줄까지 한 줄에 하나의 자연수가 주어진다.
+        주어지는 자연수는 100 보다 작다.
+        출력) 첫째 줄에 최댓값을 출력하고, 둘째 줄에 최댓값이 몇 번째 수인지를 출력한다.
+         */
+
+        Scanner sc = new Scanner(System.in);
+
+        int[] array = new int[9];
+        for (int i = 0; i < 9; i++) {
+            array[i] = sc.nextInt();
+        }
+
+        int max = -1;
+        int position = -1;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+                position = i + 1;
+            }
+        }
+
+        System.out.println(max);
+        System.out.println(position);
+    }
+
+    public static void N1157() {
         /* 단어 공부
          * 알파벳 대소문자로 된 단어가 주어지면, 이 단어에서 가장 많이 사용된
          * 알파벳이 무엇인지 알아내는 프로그램을 작성하시오. 단, 대문자와 소문자를 구분하지 않는다.
@@ -86,7 +112,7 @@ public class Main {
         int highestValue = -1;
         char highestChar = '0';
         for (Map.Entry<Character, Integer> entry :
-                map.entrySet()){
+                map.entrySet()) {
             int value = entry.getValue();
             if (value > highestValue) {
                 highestValue = value;
@@ -97,6 +123,115 @@ public class Main {
         }
 
         System.out.print(highestChar);
+
+        sc.close();
+    }
+
+    public static void N1152() {
+        /* 단어의 개수
+           영어 대소문자와 띄어쓰기만으로 이루어진 문자열이 주어진다.
+           이 문자열에는 몇 개의 단어가 있을까? 이를 구하는 프로그램을 작성하시오.
+           단, 한 단어가 여러 번 등장하면 등장한 횟수만큼 모두 세어야 한다.
+           입력) 첫 줄에 영어 대소문자와 띄어쓰기로 이루어진 문자열이 주어진다.
+           이 문자열의 길이는 1,000,000을 넘지 않는다. 단어는 띄어쓰 한 개로 구분되며,
+           공백이 연속해서 나오는 경우는 없다. 또한 문자열의 앞과 뒤에는 공백이 있을 수도 있다.
+         */
+
+        Scanner sc = new Scanner(System.in);
+
+        String input = sc.nextLine();
+        input = input.trim();
+        String[] words = input.split(" ");
+
+        System.out.print(words.length);
+
+        sc.close();
+    }
+
+    public static void N3052() {
+        /* 나머지
+        두 자연수 A와 B가 있을 때, A%B는 A를 B로 나눈 나머지 이다. 예를 들어, 7, 14, 27, 38을 3으로 나눈 나머지는 1, 2, 0, 2이다.
+        수 10개를 입력받은 뒤, 이를 42로 나눈 나머지를 구한다. 그 다음 서로 다른 값이 몇 개 있는지 출력하는 프로그램을 작성하시오.
+        입력) 첫째 줄부터 열번째 줄 까지 숫자가 한 줄에 하나씩 주어진다. 이 숫자는 1,000보다 작거나 같고, 음이 아닌 정수이다.
+        출력) 첫째 줄에, 42로 나누었을 때, 서로 다른 나머지가 몇 개 있는지 출력한다.
+         */
+
+        Scanner sc = new Scanner(System.in);
+        int[] array = new int[42];
+
+        for (int i = 0; i < 10; i++) {
+            int index = sc.nextInt() % 42;
+            array[index]++;
+        }
+
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > 0) {
+                count++;
+            }
+        }
+
+        System.out.print(count);
+
+        sc.close();
+    }
+
+    public static void Daum() {
+        /*
+        1차원의 점들이 주어졌을 때 그 중 가장 거리가 짧은 것의 쌍을 출력하는 함수를 작성하시오.
+        (단 점들의 배열은 모두 정렬되어있다고 가정한다.)
+        예를들어 S={1, 3, 4, 8, 13, 17, 20} 이 주어졌다면, 결과값은 (3, 4)가 될 것이다.
+         */
+
+        int[] array = new int[] {1, 3, 4, 8, 13, 17, 20};
+
+        int index = -1;
+        int nearestDist = array.length;
+        for (int i = 0; i < array.length - 1; i++) {
+            int dist = array[i + 1] - array[i];
+            if (dist < nearestDist) {
+                nearestDist = dist;
+                index = i;
+            }
+        }
+
+        System.out.printf("(%d, %d)", array[index], array[index + 1]);
+    }
+
+    public static void N5662() {
+        /* 다이얼
+        상근이의 할머니는 아래 그림과 같이 오래된 다이얼 전화기를 사용한다.
+        전화를 걸고 싶은 번호가 있다면, 숫자를 하나를 누른 다음에 금속 핀이 있는 곳 까지 시계방향으로 돌려야 한다. 숫자를 하나 누르면 다이얼이 처음 위치로 돌아가고,
+        다음 숫자를 누르려면 다이얼을 처음 위치에서 다시 돌려야 한다.
+        숫자 1을 걸려면 총 2초가 필요하다. 1보다 큰 수를 거는데 걸리는 시간은 이보다 더 걸리며, 한 칸 옆에 있는 숫자를 걸기 위해선 1초씩 더 걸린다.
+        상근이의 할머니는 전화 번호를 각 숫자에 해당하는 문자로 외운다. 즉, 어떤 단어를 걸 때, 각 알파벳에 해당하는 숫자를 걸면 된다. 예를 들어, UNUCIC는 868242와 같다.
+        할머니가 외운 단어가 주어졌을 때, 이 전화를 걸기 위해서 필요한 최소 시간을 구하는 프로그램을 작성하시오.
+        입력) 첫째 줄에 알파벳 대문자로 이루어진 단어가 주어진다 단어의 길이는 2보다 크거나 같고, 15보다 작거나 같다.
+        출력) 첫째 줄에 다이얼을 걸기 위해서 필요한 최소 시간을 출력한다.
+         */
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+
+        int time = 0;
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+
+            int number = 0;
+            if (c <= 82) {
+                number = (c - 65) / 3 + 2;
+            } else if (c == 83) {
+                number = 7;
+            } else if (c <= 86) {
+                number = 8;
+            } else {
+                number = 9;
+            }
+
+            time += number + 1;
+        }
+
+        System.out.print(time);
 
         sc.close();
     }
