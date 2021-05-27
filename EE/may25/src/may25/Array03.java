@@ -1,6 +1,7 @@
 package may25;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Array03 {
 
@@ -30,5 +31,13 @@ public class Array03 {
 		for (int i = 0; i < cat.length; i++) {
 			System.out.println((char)(cat[i] + 3));
 		}
+		
+		Scanner sc = new Scanner(System.in);
+		String input = sc.next();
+		char[] string2Char = input.toCharArray();
+		
+		System.out.println(Arrays.toString(string2Char));
+		
+		sc.close();
 	}
 }

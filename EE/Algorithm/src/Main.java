@@ -82,4 +82,8 @@ public class Main {
 
         sc.close();
 	}
+	
+	public static void N1152() {
+		
+	}
 }
