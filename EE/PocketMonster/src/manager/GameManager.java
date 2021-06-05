@@ -1,7 +1,9 @@
+package manager;
+
+import area.AreaType;
+
 public class GameManager {
 
-	private boolean isPlaying;
-	
 	public void init() {
 	}
 	
@@ -9,9 +11,7 @@ public class GameManager {
 		InputManager.getInstance().release();
 	}
 	
-	public void updateLoop() {
-		while (isPlaying) {
-			AreaManager.getInstance().update();
-		}
+	public void start() {
+		AreaManager.getInstance().changeArea(AreaType.PROLOGUE);
 	}
 }

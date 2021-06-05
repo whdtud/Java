@@ -1,3 +1,6 @@
+package common;
+
+import manager.GameManager;
 
 public class Main {
 
@@ -5,7 +8,7 @@ public class Main {
 
 		GameManager gameManager = new GameManager();
 		gameManager.init();
-		gameManager.updateLoop();
+		gameManager.start();
 		gameManager.release();		
 	}
 }

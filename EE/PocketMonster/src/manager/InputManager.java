@@ -1,3 +1,5 @@
+package manager;
+
 import java.util.Scanner;
 
 public class InputManager {
@@ -7,7 +9,7 @@ public class InputManager {
 	private static InputManager instance;
 	public static InputManager getInstance() {
 		if (instance == null) {
-			return new InputManager();
+			instance = new InputManager();
 		}
 		return instance;
 	}
