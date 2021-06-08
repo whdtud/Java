@@ -2,10 +2,14 @@ package starcraft;
 
 public class Zealot extends ProtossUnit {
 
+	public Zealot() {
+		name = "질럿";
+	}
+	
 	public Zealot(String name, int strength, int shield) {
 		this.name = name;
 		this.shield = shield;
-		this.strength = strength;
+		this.hp = strength;
 	}
 	
 	@Override

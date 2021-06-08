@@ -1,7 +1,6 @@
 package starcraft;
 
-public class ProtossUnit extends StarCraftUnit {
-	String clan;
+public class ProtossUnit extends Unit {
 	int shield;
 	
 	public void attack() {
