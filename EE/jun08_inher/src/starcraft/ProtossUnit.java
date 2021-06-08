@@ -1,6 +1,6 @@
 package starcraft;
 
-public class Protoss extends StarCraft {
+public class ProtossUnit extends StarCraftUnit {
 	String clan;
 	int shield;
 	

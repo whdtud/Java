@@ -1,6 +1,6 @@
 package starcraft;
 
-public class Zealot extends Protoss {
+public class Zealot extends ProtossUnit {
 
 	public Zealot(String name, int strength, int shield) {
 		this.name = name;

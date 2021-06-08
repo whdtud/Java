@@ -1,6 +1,6 @@
 package starcraft;
 
-public class Marine extends Terran {
+public class Marine extends TerranUnit {
 
 	public Marine() {
 

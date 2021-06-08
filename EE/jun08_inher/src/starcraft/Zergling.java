@@ -1,5 +1,5 @@
 package starcraft;
 
-public class Zergling extends Zerg {
+public class Zergling extends ZergUnit {
 
 }

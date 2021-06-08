@@ -1,6 +1,6 @@
 package starcraft;
 
-public class StarCraft {
+public class StarCraftUnit {
 	String name;
 	int strength;
 }
