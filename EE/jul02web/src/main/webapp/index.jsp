@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+if(session.getAttribute("id") != null){
+	response.sendRedirect("./board.jsp");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,6 +77,7 @@ body{
 				<input type="password" id="pw" name="pw" 
 				placeholder="암호를 입력하세요" required="required">
 				<button type="submit">LOGIN</button>
+				<a href="./join.jsp">가입하기</a>
 			</form>
 		</div>
 	</div>

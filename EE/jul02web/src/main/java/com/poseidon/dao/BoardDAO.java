@@ -102,12 +102,114 @@ public class BoardDAO {
 			}
 		}
 		
+	}
+
+	public int delete(int bno, String id) {
+		int result = 0;
+		Connection conn = DBConnection.dbConn();
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM board WHERE bno=? "
+				+ "AND no=(SELECT no FROM login WHERE id=?)";
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+			System.out.println(result + " !!!!!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {pstmt.close();}
+				if(conn != null) {conn.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
+		return result;
+	}
+
+	public BoardDTO update(int bno, String id) {
+		BoardDTO dto = null;
+		//conn = dbConn()
+		Connection conn = DBConnection.dbConn();
+		//pstmt
+		PreparedStatement pstmt = null;
+		//resultSet
+		ResultSet rs = null;
+		//sql detail과 흡사하지만 +no가 들어갑니다
+		String sql = "SELECT * FROM board WHERE bno=? AND no=(SELECT no FROM login WHERE id=?)";
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				dto = new BoardDTO();
+				dto.setBno(rs.getInt("bno"));//수정한 자신의 글로 돌아가기위해
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setBcontent(rs.getString("bcontent"));
+				//dto.setId(rs.getString("id"));//없어도 되겠지만 가져갑니다
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) {rs.close();}
+				if(pstmt != null) {pstmt.close();} 
+				if(conn != null) {conn.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
+		return dto;
+	}
+
+	public void update2(BoardDTO dto) {
+		Connection conn = DBConnection.dbConn();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE board SET btitle=?, bcontent=? "
+				+ "WHERE bno=? AND no=(SELECT no FROM login WHERE id=?)";
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getBtitle());
+			pstmt.setString(2, dto.getBcontent());
+			pstmt.setInt(3, dto.getBno());
+			pstmt.setString(4, dto.getId());
+			pstmt.execute();//select제외한 나머지
+			//pstmt.executeQuery(); //select
+			//pstmt.executeUpdate(); //영향받은 행이 몇 개? 리턴타입 int
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {pstmt.close();}
+				if(conn != null) {conn.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

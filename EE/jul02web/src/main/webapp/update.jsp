@@ -1,7 +1,8 @@
+<%@page import="com.poseidon.dto.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-//로그인 한 사람만 글쓰기에 접근할 수 있습니다.
+//로그인 한 사람만 수정에 접근할 수 있습니다.
 if (session.getAttribute("id") == null) {
 	//페이지 이동
 	response.sendRedirect("./index.jsp");
@@ -11,7 +12,7 @@ if (session.getAttribute("id") == null) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>글수정</title>
 <style type="text/css">
 body {
 	margin: 0;
@@ -82,13 +83,18 @@ body {
 </head>
 <body>
 	<%@ include file="./menu.jsp"%>
-	<h1>글쓰기</h1>
+	<!-- 서블릿에서 보내온 값 잡기 -->
+	<%
+	BoardDTO dto = (BoardDTO) request.getAttribute("dto");
+	%>
+	<h1>글수정</h1>
 	<hr>
 	<div id="write">
-		<form action="./writeAction" method="post" onsubmit="return check();">
-			<input type="text" name="title" id="title">
-			<textarea name="content" id="content"></textarea>
-			<button id="sub" type="submit">글쓰기</button>
+		<form action="./update" method="post" onsubmit="return check();">
+			<input type="text" name="title" id="title" value="<%=dto.getBtitle() %>">
+			<textarea name="content" id="content"><%=dto.getBcontent() %></textarea>
+			<button id="sub" type="submit">글수정</button>
+			<input type="hidden" name="bno" value="<%=dto.getBno() %>">
 		</form>
 	</div>
 
