@@ -49,7 +49,7 @@ public class Update extends HttpServlet {
 //			System.out.println(dto.getBcontent());
 //			System.out.println(dto.getId());
 			
-			if(dto != null) {
+			if (dto != null) {
 				//데이터베이스에서 리턴된 객체가 있다면 화면그리기
 				//이제 디스패쳐라는 녀석을 사용합니다.
 				RequestDispatcher dispatcher 
@@ -57,12 +57,12 @@ public class Update extends HttpServlet {
 				request.setAttribute("dto", dto);//값 전달
 				dispatcher.forward(request, response);
 				
-			}else {
+			} else {
 				//에러로 보내기
 				response.sendRedirect("error.jsp?error=5505");//값이 없습니다.
 			}
 			
-		}else {
+		} else {
 			//로그인 하지 않았거나, bno가 없거나, bno가 숫자가 아닌 경우
 			//에러로 보내기
 			response.sendRedirect("error.jsp?error=3306");//잘못된 접근입니다.
@@ -102,7 +102,7 @@ public class Update extends HttpServlet {
 			
 			//페이지 이동
 			response.sendRedirect("./detail.jsp?bno=" + bno);
-		}else {
+		} else {
 			//데이터가 빠졌습니다.
 			response.sendRedirect("./error.jsp");
 		}

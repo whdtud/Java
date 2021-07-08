@@ -71,7 +71,7 @@ body{
 				html + java
 				html코드 속에 자바를 넣었어요.
 			-->
-			<form action="./loginAction" method="post">
+			<form action="./loginAction" method="post" onsubmit="return check()">
 				<input type="text" id="id" name="id" 
 				placeholder="아이디를 입력하세요" required="required">
 				<input type="password" id="pw" name="pw" 
@@ -79,8 +79,17 @@ body{
 				<button type="submit">LOGIN</button>
 				<a href="./join.jsp">가입하기</a>
 			</form>
+				<!-- <button type="button" onclick="location.href='./join.jsp'">가입하기</button> -->
 		</div>
 	</div>
-
+	<%
+	if(request.getParameter("error") != null){
+	%>
+	<script type="text/javascript">
+		alert("올바른 ID와 암호를 입력하세요.");
+	</script>	
+	<%
+	}
+	%>
 </body>
 </html>

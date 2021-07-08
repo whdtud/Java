@@ -70,7 +70,7 @@ li a {
 			<li><a href="./index.jsp"><img alt="apple" src="./apple.png" id="logo"></a></li>
 			<li><a href="./board.jsp">board</a></li>
 			<li><a href="./freeboard.jsp">free</a></li>
-			<li><a href="./notice.jsp">notice</a></li>
+			<li><a href="./notice">notice</a></li>
 			<li><a href="./shop.jsp">shop</a></li>
 		</ul>
 	</div>

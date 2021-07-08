@@ -65,7 +65,7 @@ public class LoginAction extends HttpServlet {
 			//System.out.println(session.getAttribute("name"));
 			response.sendRedirect("./board.jsp");
 		}else {
-			response.sendRedirect("./index.jsp");
+			response.sendRedirect("./index.jsp?error=4456");
 		}
 		
 		

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+
 //로그인 한 사람만 수정에 접근할 수 있습니다.
 if (session.getAttribute("id") == null) {
 	//페이지 이동

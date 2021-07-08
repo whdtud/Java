@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>보드</title>
+<title>공지사항</title>
 <style type="text/css">
 *{
 	margin: 0;
@@ -36,10 +36,13 @@ tr:hover {
 </head>
 <body>
 <%@ include file="./menu.jsp"%>
-	<h1>board</h1>
+	<h1>notice</h1>
 <%
-	BoardDAO dao = new BoardDAO();
-	ArrayList<BoardDTO> list = dao.list();
+	//BoardDAO dao = new BoardDAO();
+	//ArrayList<BoardDTO> list = dao.list();
+	//서블릿에서 보내온 값 잡기
+	ArrayList<BoardDTO> list 
+			= (ArrayList<BoardDTO>) request.getAttribute("notice");
 %>	
 	<table>
 		<tr>

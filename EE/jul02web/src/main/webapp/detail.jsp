@@ -12,7 +12,7 @@
 #detail{
 	margin: 0 auto;
 	width: 800px;
-	height: 500px;
+	min-height: 500px;
 	background-color: silver;
 }
 #title{
@@ -37,7 +37,7 @@
 	padding: 5px;
 }
 #content{
-	height: calc(100% - 91px);
+	min-height: calc(100% - 91px);
 	width: 100%;
 	padding: 20px;
 	box-sizing: border-box;
@@ -70,8 +70,11 @@ function del(bno){
 	<div id="detail">
 		<div id="title">
 			<%=dto.getBtitle() %>
+			<%if( session.getAttribute("id") != null 
+				&& ((String)session.getAttribute("id")).equals(dto.getId()) ){ %>
 			<img alt="delete" src="./delete.png" height="20px" onclick="return del(<%=dto.getBno() %>);" style="vertical-align: middle;">
 			<img alt="update" src="./update.png" height="20px" onclick="return update(<%=dto.getBno() %>); "style="vertical-align: middle;">
+			<%} %>
 		</div>
 		<div id="date">
 			<div id="date2"><%=dto.getName() %><br>(<%=dto.getId() %>)</div>		
