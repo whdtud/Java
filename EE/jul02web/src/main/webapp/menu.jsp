@@ -72,6 +72,9 @@ li a {
 			<li><a href="./freeboard.jsp">free</a></li>
 			<li><a href="./notice">notice</a></li>
 			<li><a href="./shop.jsp">shop</a></li>
+			<%if(session.getAttribute("name") != null){ %>
+			<li><a href="./myinfo">my info</a></li>
+			<%} %>
 		</ul>
 	</div>
 	<div id="menusession">

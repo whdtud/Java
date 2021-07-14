@@ -1,8 +1,24 @@
+<%@page import="com.poseidon.util.Util"%>
+<%@page import="com.poseidon.dao.LogDAO"%>
+<%@page import="com.poseidon.dto.LogDTO"%>
 <%@page import="com.poseidon.dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.poseidon.dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String ip = Util.getIP(request);
+//DTO만들기
+LogDTO dto = new LogDTO();
+//값 저장하기
+dto.setLog_ip(ip);
+dto.setLog_taget("board.jsp");
+if(session.getAttribute("id") != null){
+dto.setLog_id((String) session.getAttribute("id"));
+}
+//DAO로보내서 저장시키기
+LogDAO.insertLog(dto);
+%>
 <!DOCTYPE html>
 <html>
 <head>

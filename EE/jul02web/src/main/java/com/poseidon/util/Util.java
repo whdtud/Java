@@ -1,6 +1,29 @@
 package com.poseidon.util;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Util {
+	//ip가져오기
+	public static String getIP(HttpServletRequest request) {
+		String ip = request.getHeader("X-FORWARDED-FOR");
+		if(ip == null) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if(ip == null) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if(ip == null) {
+			ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if(ip == null) {
+			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		if(ip == null) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
+	
 	// 방법1
 	public static int str2Int(String str) {
 		// 120A이렇게 들어온다면 120을 리턴해줍니다.

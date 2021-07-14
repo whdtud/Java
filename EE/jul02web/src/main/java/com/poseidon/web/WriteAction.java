@@ -71,6 +71,12 @@ public class WriteAction extends HttpServlet {
 			System.out.println("content : " + content);
 			System.out.println("id : " + id);
 			
+			//<, >, / 치환하기
+			title = title.replaceAll("<", "&lt;");
+			title = title.replaceAll(">", "&gt;");
+			title = title.replaceAll("/", "&#47;");			
+			//글쓰기, 수정하기, 회원가입
+			
 			//boarddto에 담기
 			BoardDTO dto = new BoardDTO();
 			dto.setBtitle(title);

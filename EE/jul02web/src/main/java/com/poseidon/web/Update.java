@@ -91,6 +91,13 @@ public class Update extends HttpServlet {
 			//System.out.println(content);
 			//System.out.println(bno);
 			//if문으로 
+			
+			//<, >, / 치환하기
+			title = title.replaceAll("<", "&lt;");
+			title = title.replaceAll(">", "&gt;");
+			title = title.replaceAll("/", "&#47;");			
+			//글쓰기, 수정하기, 회원가입
+			
 			//데이터베이스로 보내기
 			BoardDTO dto = new BoardDTO();
 			dto.setBno(bno);

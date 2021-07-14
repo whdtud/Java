@@ -1,9 +1,31 @@
+<%@page import="com.poseidon.dao.LogDAO"%>
+<%@page import="com.poseidon.dto.LogDTO"%>
+<%@page import="com.poseidon.util.Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 if(session.getAttribute("id") != null){
 	response.sendRedirect("./board.jsp");
 }
+
+//로그남기기
+//상대방 ip를 알아와서 데이터베이스에 저장하겠습니다.
+String ip = Util.getIP(request);
+//아이피 서버로 보내서 저장시키기
+//LogDAO?   보드DAO, loginDAO
+
+		//DTO만들기
+		LogDTO dto = new LogDTO();
+		//값 저장하기
+		dto.setLog_ip(ip);
+		dto.setLog_taget("index.jsp");
+		if(session.getAttribute("id") != null){
+			dto.setLog_id((String) session.getAttribute("id"));
+		}
+		
+		//DAO로보내서 저장시키기
+		LogDAO.insertLog(dto);
+		//DB에서 확인해보기
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +78,6 @@ body{
 </head>
 <body>
 	<%@ include file="./menu.jsp"%>
-
 	<div class="loginbox">
 		<div id="loginimg">
 			<img alt="bonobono" src="./bono.jpg">
@@ -77,7 +98,8 @@ body{
 				<input type="password" id="pw" name="pw" 
 				placeholder="암호를 입력하세요" required="required">
 				<button type="submit">LOGIN</button>
-				<a href="./join.jsp">가입하기</a>
+				<a href="./join.jsp">가입하기</a> | 
+				<a href="./idpw.jsp">ID/PW 찾기</a>
 			</form>
 				<!-- <button type="button" onclick="location.href='./join.jsp'">가입하기</button> -->
 		</div>

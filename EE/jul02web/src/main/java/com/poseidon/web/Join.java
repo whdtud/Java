@@ -39,20 +39,29 @@ public class Join extends HttpServlet {
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String pw1 = request.getParameter("pw1");
-			String pw2 = request.getParameter("pw2");
+			//String pw2 = request.getParameter("pw2");
 			String email = request.getParameter("email");
+			String date2 = request.getParameter("date2");
 			
 			//System.out.println(id + " : " + name + " : " + email);
 			//System.out.println("pw : " + pw1 + " : " + pw2);
+			
+			//<, >, / 치환하기
+			name = name.replaceAll("<", "&lt;");
+			name = name.replaceAll(">", "&gt;");
+			name = name.replaceAll("/", "&#47;");
+			//글쓰기, 수정하기, 회원가입
+			
 			//DAO로 보내기 -> DTO에 담아주세요.
 			LoginDTO dto = new LoginDTO();
 			dto.setId(id);
 			dto.setName(name);
 			dto.setPw(pw1);//단, pw1만 담아주세요.
 			dto.setEmail(email);
+			dto.setDate2(date2);//여기에 생년 월 일 있습니다.
 			//DB작업하기
 			LoginDAO dao = new LoginDAO();
-			int count = dao.join(dto);
+			int count = dao.join(dto);//DAO join메소드로 보냅니다
 			//가입이 완료되었다면 성공페이지로
 			//System.out.println(count + "개 완료");
 			

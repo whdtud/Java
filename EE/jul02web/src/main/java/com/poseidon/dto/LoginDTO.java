@@ -1,10 +1,8 @@
 package com.poseidon.dto;
 
-//ȸ�������Ҷ� email/id/pw/name�� �޽��ϴ�.
-//no, name, id, pw, email
 public class LoginDTO {
 	private int no;
-	private String name, id, pw, email;
+	private String name, id, pw, email, date2;
 
 	public int getNo() {
 		return no;
@@ -44,6 +42,14 @@ public class LoginDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getDate2() {
+		return date2;
+	}
+
+	public void setDate2(String date2) {
+		this.date2 = date2;
 	}
 
 }
