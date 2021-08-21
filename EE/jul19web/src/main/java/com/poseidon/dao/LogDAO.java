@@ -216,4 +216,80 @@ public class LogDAO {
 		return list;
 	}
 
+	public ArrayList<HashMap<String, Object>> search(String searchName, String search, int page) {
+		ArrayList<HashMap<String, Object>> list = null;
+		Connection con = DBConnection.dbConn();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT (SELECT count(*) FROM log WHERE log_"
+					+searchName
+					+" LIKE CONCAT('%',?,'%')) as totalcount, "
+					+"log_no, log_ip, log_date, log_id, log_etc, log_target "
+					+"FROM log WHERE log_"+searchName
+					+" LIKE CONCAT('%',?,'%') limit ?, 20";
+		//System.out.println(sql);
+		//SELECT * FROM logview WHERE log_ip LIKE CONCAT('%',?,'%')
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, search);
+			pstmt.setString(2, search);
+			pstmt.setInt(3, page);
+			rs = pstmt.executeQuery();
+			System.out.println(pstmt);
+//sql : 'SELECT (SELECT count(*) FROM log WHERE log_ip LIKE CONCAT('%',?,'%')) as totalcount, log_no, log_ip, log_date, log_id, log_etc, log_target FROM log WHERE log_ip LIKE CONCAT('%',?,'%') limit ?, 10', parameters : ['222','222',1]
+
+			if(rs != null) {
+				list = new ArrayList<HashMap<String, Object>>();
+				while (rs.next()) {
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("totalcount", rs.getInt("totalcount"));
+					map.put("log_no", rs.getInt("log_no"));
+					map.put("log_ip", rs.getString("log_ip"));
+					map.put("log_date", rs.getString("log_date"));
+					map.put("log_target", rs.getString("log_target"));
+					map.put("log_id", rs.getString("log_id"));
+					map.put("log_etc", rs.getString("log_etc"));
+					list.add(map);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Util.closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
+
+	public ArrayList<HashMap<String, Object>> memberList(int page) {
+		ArrayList<HashMap<String, Object>> list = null;
+		Connection con = DBConnection.dbConn();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT (SELECT COUNT(*) FROM login) AS totalcount, "
+				+ "l.* FROM login l LIMIT ?, 20";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, page);
+			rs = pstmt.executeQuery();
+			if (rs != null) {
+				list = new ArrayList<HashMap<String, Object>>();
+				while (rs.next()) {
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("totalcount", rs.getInt("totalcount"));
+					map.put("no", rs.getInt("no"));
+					map.put("id", rs.getString("id"));
+					map.put("name", rs.getString("name"));
+					map.put("pw", rs.getString("pw"));
+					map.put("email", rs.getString("email"));
+					map.put("joindate", rs.getString("joindate"));
+					map.put("birthdate", rs.getString("birthdate"));
+					map.put("grade", rs.getInt("grade"));
+					list.add(map);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

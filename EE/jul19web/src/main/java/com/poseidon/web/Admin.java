@@ -81,6 +81,30 @@ public class Admin extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int page = 1;
+		if(request.getParameter("page") != null) {
+			page = Util.str2Int(request.getParameter("page"));
+		}
+		
+		String searchName = request.getParameter("searchname");
+		String search = request.getParameter("search");
+		//System.out.println(searchName);
+		//System.out.println(search);
+		
+		ArrayList<HashMap<String, Object>> list = 
+								dao.search(searchName, search, page);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+		request.setAttribute("list", list);
+		//totalCount
+		if(list != null && list.size() > 0) {
+			request.setAttribute(
+					"totalCount", list.get(0).get("totalcount"));
+		}
+		//page도 보내야 합니다.
+		request.setAttribute("page", page);
+		rd.forward(request, response);
 	}
 
 }

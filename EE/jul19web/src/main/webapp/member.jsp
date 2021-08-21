@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin</title>
+<title>member</title>
 <link href="./css/main.css" rel="stylesheet">
 <link href="./css/menu.css" rel="stylesheet">
 <style type="text/css">
@@ -65,63 +65,41 @@ td{
 				<a href="member">회원관리</a> | 게시글 관리 | <a href="admin">로그 관리</a> | ....
 			</div>
 			<div id="adminMain">
-				<!-- 실제 내용 출력 
-				로그 전체 불러오기를 하겠습니다.
-				한 화면에 20개 출력되게 해주세요  = 게시판
-				table로 만드세요.
-				--> 
 				전체 글 수 : ${totalCount } 개 / 페이지 : ${page }
-				<form action="admin" method="post">
-				<select name="searchname">
-					<option value="ip">ip</option>
-					<option value="target">target</option>
-					<option value="etc">etc</option>
-				</select>
-				<input type="text" id="search" name="search">
-				<button type="submit">검색</button>
-				</form>
-				
 				<c:choose>
 					<c:when test="${fn:length(list) > 0 }">
 				<table style="width: 100%; font-size: smaller;">
 					<tr>
 						<th>no</th>
-						<th>
-						<select onchange="select()" id="ip">
-							<option value="">ip를 선택</option>
-							<c:forEach items="${ipList }" var="i">
-								<c:if test="${i eq ip }">
-									<option value="${i }" selected="selected">${i }</option>
-								</c:if>
-								<c:if test="${i ne ip }">
-									<option value="${i }">${i }</option>
-								</c:if>
-							</c:forEach>
-						</select>
-						</th>
-						<th>date</th>
-						<th>
-						<select onchange="select()" id="target">
-							<option value="">target을 선택</option>
-							<c:forEach items="${targetList }" var="t">
-								<c:if test="${target eq t }">
-									<option value="${t }" selected="selected">${t }</option>
-								</c:if>
-								<c:if test="${target ne t }">
-									<option value="${t }">${t }</option>
-								</c:if>
-							</c:forEach>
-						</select>
-						</th>
-						<th>etc</th>
+						<th>이름</th>
+						<th>아이디</th>
+						<th>비밀번호</th>
+						<th>email</th>
+						<th>joindate</th>
+						<th>birthdate</th>
+						<th>grade</th>
 					</tr>
 					<c:forEach items="${list }" var="l">
 					<tr>						
-						<td>${l.log_no }</td>
-						<td>${l.log_ip }</td>
-						<td>${l.log_date }</td>
-						<td>${l.log_target }</td>
-						<td><c:out value="${fn:substring(l.log_etc, 0, 40) }"/> </td>
+						<td>${l.no }</td>
+						<td>${l.name }</td>
+						<td>${l.id }</td>
+						<td><span onclick="changePW(${l.no})">${l.pw }</span></td>
+						<td>${l.email }</td>
+						<td>${l.joindate }</td>
+						<td>${l.birthdate }</td>
+						<td>
+							<select onchange="changeGrade(${l.no })">
+								<c:forEach begin="0" end="9" var="g">
+									<c:if test="${g eq l.grade }">
+										<option selected="selected">${g }</option>
+									</c:if>
+									<c:if test="${g ne l.grade }">
+										<option>${g }</option>
+									</c:if>								
+								</c:forEach>
+							</select>
+						</td>
 					</tr>
 					</c:forEach>
 				</table>
@@ -144,14 +122,12 @@ td{
 </div>
 
 <script type="text/javascript">
-function select(){
-	//value값을 가져오고 싶다면 ?
-	//alert("!");
-	var ip = document.getElementById("ip").value;
-	var target = document.getElementById("target").value;
-	//값 오는 것이 확인된다면 서블릿을 보내서 해당 ip것만 받도록 합니다.
-	//location.href='admin?ip=' + ip + '&page=' + ${page };
-	location.href='admin?ip='+ip+'&target='+target;
+function changePW(no){
+	//alert(no + "암호 번경을 눌렀습니다.");
+	var pw = prompt("변경할 암호를 입력하세요.");
+	//alert("입력한 암호는 : " + pw);
+	location.href="adminChangePW?no="+no+"&pw="+pw;
+	//나중에는 post전송으로도 보내보세요.
 }
 </script>
 
