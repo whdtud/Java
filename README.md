@@ -1,3 +1,1 @@
-# Java
-language
-Test commit
+# Java 언어 수업 자료입니다.
