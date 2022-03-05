@@ -1,8 +1,9 @@
-public class MockTimeSink implements ClockObserver {
+public class MockTimeSink implements Observer {
 
     private int hours;
     private int minutes;
     private int seconds;
+    private TimeSource source;
 
     public int getHours() {
         return hours;
@@ -17,9 +18,9 @@ public class MockTimeSink implements ClockObserver {
     }
 
     @Override
-    public void update(int hours, int minutes, int seconds) {
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
+    public void update() {
+        this.hours = source.getHours();
+        this.minutes = source.getMinutes();
+        this.seconds = source.getSeconds();
     }
 }
